@@ -26,10 +26,10 @@ import h5py
 
 
 class TestVesselClassification(TestCase):
-    _resources = 'retipy/resources/images/'
+    _resources = 'resources/images/'
     _image_file_name = 'manual.png'
     _image_path = _resources + _image_file_name
-    _test_path = 'retipy/test/csv/'
+    _test_path = 'csv/'
 
     def setUp(self):
         self.manual = Retina(None, self._image_path)

@@ -23,10 +23,10 @@ from numpy.testing import assert_array_equal
 
 
 class TestLandmarks(TestCase):
-    _resources = 'retipy/resources/images/'
+    _resources = 'resources/images/'
     _image_file_name = 'test_landmarks.png'
     _image_path = _resources + _image_file_name
-    _test_path = 'retipy/test/csv/'
+    _test_path = 'csv/'
 
     def setUp(self):
         self.image = Retina(None, self._image_path)
