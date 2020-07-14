@@ -38,10 +38,12 @@ def post_drusen_classification_by_size():
 		if json is not None:  # pragma: no cover
 			image = base64.b64decode(json["image"])
 			image = Image.open(io.BytesIO(image))   
-			image.save("prueba.jpg")
-			image = cv2.imread("prueba.jpg")
+			image.save("tmp_drusen.jpg")
+			image = cv2.imread("tmp_drusen.jpg")
 			drusen_image, classification_scale  = drusen.main(image)
-			information = "Total Normal Drusen (<= 63 micron) : "+ str(classification_scale["Normal"])+",Total Medium Drusen (>  63 micron and <= 125 micron) : "+str(classification_scale["Medium"])+",Total Large Drusen  (>  125 micron) : "+str(classification_scale["Large"])
+			cv2.imwrite("tmp_drusen.jpg",drusen_image)
+			drusen_image = Retina._open_image("tmp_drusen.jpg")
+			information = "Total Normal Drusen (<= 63 micron) : "+ str(classification_scale["Normal"])+",Total Medium Drusen (>  63 micron and <= 125 micron) : "+str(classification_scale["Medium"])+",Total Large Drusen  (>  125 micron) : "+str(classification_scale["Large"])+",Normal= Green Color Medium Blue Color Large = Red Color"
 			data = {"drusen": Retina.get_base64_image(drusen_image,False), "information": information}
 	return flask.jsonify(data)
 
